@@ -33,7 +33,6 @@ const initialValuesRegister = {
     password: "",
     location: "",
     occupation: "",
-    picture: "",
 };
 
 const initialValuesLogin = {
