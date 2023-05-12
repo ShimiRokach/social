@@ -7,27 +7,33 @@ import {
 import { Box, Typography, Divider } from "@mui/material";
 import FlexBetween from "../../components/FlexBetween";
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+//import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const UserWidget = ({ userId }) => {
-    const [user, setUser] = useState(null);
+const UserWidget = () => {
+    //const [user, setUser] = useState(null);
     const navigate = useNavigate();
-    const token = useSelector((state) => state.token);
+    //const token = useSelector((state) => state.token);
 
+    // const { token, user } = useSelector((state) => ({
+    //     token: state.token,
+    //     user: state.user
+    // }));
 
-    const getUser = async () => {
-        const response = await fetch(`http://localhost:3001/users/${userId}`, {
-            method: "GET",
-            headers: { Authorization: `Bearer ${token}` },
-        });
-        const data = await response.json();
-        setUser(data);
-    };
+    const user = useSelector((state) => state.user);
 
-    useEffect(() => {
-        getUser();
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    // const getUser = async () => {
+    //     const response = await fetch(`http://localhost:3001/users/${userId}`, {
+    //         method: "GET",
+    //         headers: { Authorization: `Bearer ${token}` },
+    //     });
+    //     const data = await response.json();
+    //     setUser(data);
+    // };
+
+    // useEffect(() => {
+    //     getUser();
+    // }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     if (!user) {
         return null;
@@ -49,24 +55,22 @@ const UserWidget = ({ userId }) => {
             <FlexBetween
                 gap="0.5rem"
                 pb="1.1rem"
-                onClick={() => navigate(`/profile/${userId}`)}
+                onClick={() => navigate(`/profile/${user._id}`)}
             >
-                <FlexBetween gap="1rem">
-                    <Box>
-                        <Typography
-                            variant="h4"
-                            fontWeight="500"
-                            sx={{
-                                "&:hover": {
-                                    cursor: "pointer",
-                                },
-                            }}
-                        >
-                            {firstName} {lastName}
-                        </Typography>
-                        <Typography>{friends.length} friends</Typography>
-                    </Box>
-                </FlexBetween>
+                <Box>
+                    <Typography
+                        variant="h4"
+                        fontWeight="500"
+                        sx={{
+                            "&:hover": {
+                                cursor: "pointer",
+                            },
+                        }}
+                    >
+                        {firstName} {lastName}
+                    </Typography>
+                    <Typography>{friends.length} friends</Typography>
+                </Box>
                 <ManageAccountsOutlined />
             </FlexBetween>
 
@@ -74,7 +78,7 @@ const UserWidget = ({ userId }) => {
 
             {/* SECOND ROW */}
             <Box p="1rem 0">
-                <Box display="flex" alignItems="center" gap="1rem" mb="0.5rem">
+                <Box display="flex" alignItems="center" gap="1rem" mb="0.5rem" >
                     <LocationOnOutlined fontSize="large" />
                     <Typography >{location}</Typography>
                 </Box>
@@ -111,26 +115,22 @@ const UserWidget = ({ userId }) => {
                 </Typography>
 
                 <FlexBetween gap="1rem" mb="0.5rem">
-                    <FlexBetween gap="1rem">
-                        <Box>
-                            <Typography fontWeight="500">
-                                Twitter
-                            </Typography>
-                            <Typography >Social Network</Typography>
-                        </Box>
-                    </FlexBetween>
+                    <Box>
+                        <Typography fontWeight="500">
+                            Twitter
+                        </Typography>
+                        <Typography >Social Network</Typography>
+                    </Box>
                     <EditOutlined />
                 </FlexBetween>
 
                 <FlexBetween gap="1rem">
-                    <FlexBetween gap="1rem">
-                        <Box>
-                            <Typography fontWeight="500">
-                                Linkedin
-                            </Typography>
-                            <Typography >Network Platform</Typography>
-                        </Box>
-                    </FlexBetween>
+                    <Box>
+                        <Typography fontWeight="500">
+                            Linkedin
+                        </Typography>
+                        <Typography >Network Platform</Typography>
+                    </Box>
                     <EditOutlined />
                 </FlexBetween>
             </Box>

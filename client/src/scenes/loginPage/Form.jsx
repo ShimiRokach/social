@@ -49,6 +49,7 @@ const Form = () => {
     const isRegister = pageType === "register";
 
     const register = async (values, onSubmitProps) => {
+        console.log(values);
         const savedUserResponse = await fetch(
             "http://localhost:3001/auth/register",
             {
