@@ -7,33 +7,33 @@ import {
 import { Box, Typography, Divider } from "@mui/material";
 import FlexBetween from "../../components/FlexBetween";
 import { useSelector } from "react-redux";
-//import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const UserWidget = () => {
-    //const [user, setUser] = useState(null);
+const UserWidget = ({ userId }) => {
+    const [user, setUser] = useState(null);
     const navigate = useNavigate();
-    //const token = useSelector((state) => state.token);
+    const token = useSelector((state) => state.token);
 
     // const { token, user } = useSelector((state) => ({
     //     token: state.token,
     //     user: state.user
     // }));
 
-    const user = useSelector((state) => state.user);
+    //const user = useSelector((state) => state.user);
 
-    // const getUser = async () => {
-    //     const response = await fetch(`http://localhost:3001/users/${userId}`, {
-    //         method: "GET",
-    //         headers: { Authorization: `Bearer ${token}` },
-    //     });
-    //     const data = await response.json();
-    //     setUser(data);
-    // };
+    const getUser = async () => {
+        const response = await fetch(`http://localhost:3001/users/${userId}`, {
+            method: "GET",
+            headers: { Authorization: `Bearer ${token}` },
+        });
+        const data = await response.json();
+        setUser(data);
+    };
 
-    // useEffect(() => {
-    //     getUser();
-    // }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    useEffect(() => {
+        getUser();
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     if (!user) {
         return null;

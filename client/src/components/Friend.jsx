@@ -33,7 +33,6 @@ const Friend = ({ friendId, name, subtitle, loggedInUserId }) => {
             < Box
                 onClick={() => {
                     navigate(`/profile/${friendId}`);
-                    navigate(0);
                 }}
             >
                 <Typography
